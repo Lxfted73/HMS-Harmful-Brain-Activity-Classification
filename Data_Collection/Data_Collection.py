@@ -5,6 +5,57 @@ import matplotlib.pyplot as plt
 
 # Read Parquet file into a DataFrame
 df_test_eegs = pd.read_parquet("Data/test_eegs.parquet")
+
+
+
+
+#FIRST
+# 1. Check for Missing Values
+missing_values = df_test_eegs.isnull().sum()
+print("Missing Values:\n", missing_values)
+
+# 2. Check for Outliers
+# Visualize and handle outliers if necessary
+
+# 3. Remove Irrelevant Columns (if any)
+#df_test_eegs = df_test_eegs.drop(columns=['column_name'])
+
+# 4. Calculate Mean Value
+mean_values = df_test_eegs.mean()
+print("Mean Values:\n", mean_values)
+
+
+
+#SECOND
+# Calculate Min and Max Values
+min_values = df_test_eegs.min()
+max_values = df_test_eegs.max()
+print("Min Values:\n", min_values)
+print("Max Values:\n", max_values)
+
+pd.set_option('display.max_columns', None)
+
+
+
+
+#THIRD
+# Calculate Standard Deviation, Variance, and RMS Values
+std_values = df_test_eegs.std()
+variance_values = df_test_eegs.var()
+rms_values = np.sqrt(np.mean(df_test_eegs**2))
+
+print("Standard Deviation:\n", std_values)
+print("Variance:\n", variance_values)
+print("RMS:\n", rms_values)
+
+pd.set_option('display.max_columns', None)
+
+
+
+
+
+# Read Parquet file into a DataFrame
+df_test_eegs = pd.read_parquet("Data/test_eegs.parquet")
 # df_test_spectograms = pd.read_parquet("/Data/test_spectogram.parquet")
 # df_train_eegs = pd.read_parquet("Data/train_eegs.parquet")
 # df_train_spectograms = pd.read_parquet("Data/train_spectogram.parquet")
