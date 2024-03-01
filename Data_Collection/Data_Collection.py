@@ -1,4 +1,7 @@
 import pandas as pd
+import numpy as np
+from scipy.signal import welch
+import matplotlib.pyplot as plt
 
 # Read Parquet file into a DataFrame
 df_test_eegs = pd.read_parquet("Data/test_eegs.parquet")
@@ -8,8 +11,8 @@ df_test_eegs = pd.read_parquet("Data/test_eegs.parquet")
 
 pd.set_option('display.max_columns', None)
 
-print("df_train_eegs.shape", df_test_eegs.shape)
-print("df_train_eegs.head()\n", df_test_eegs.head)
+print("df_test_eegs.shape", df_test_eegs.shape)
+print("df_test_eegs.head()\n", df_test_eegs.head)
 
 electrodes = df_test_eegs.columns[:-1]  # Exclude the last column (EKG)
 electrode_locations = df_test_eegs[electrodes]
@@ -30,9 +33,9 @@ signal_amplitudes_variance = df_test_eegs[electrodes].var(axis=0)
 # print("\nSignal Amplitudes Variance:")
 # print(signal_amplitudes_variance)
 
-import numpy as np
-from scipy.signal import welch
-import matplotlib.pyplot as plt
+# import numpy as np
+# from scipy.signal import welch
+# import matplotlib.pyplot as plt
 
 # Assume df_test_eegs contains preprocessed EEG data with shape (n_samples, n_channels)
 
@@ -46,6 +49,18 @@ freq_bands = {'delta': (0.5, 4),
 # Define sampling frequency and window length for spectral analysis
 fs = 200  # Sample rate (Hz)
 window_length = 4 * fs  # 4-second window length
+
+
+# Define parameters
+sampling_rate = 200  # Samples per second (SPS)
+duration = 50  # Duration of EEG data in seconds
+desired_frequency_resolution = 1  # Desired frequency resolution in Hz
+
+# Calculate FFT length
+fft_length = int(sampling_rate / desired_frequency_resolution)
+
+# Choose window length (power of 2)
+window_length = 2 ** int(np.ceil(np.log2(duration * sampling_rate)))
 
 # Initialize dictionaries to store results
 psd_results = {}
@@ -70,28 +85,42 @@ for channel in range(df_test_eegs.shape[1]):
     relative_power_results[channel] = relative_power
     peak_frequency_results[channel] = peak_frequency
 
-
-# Convert dictionaries to DataFrames
-psd_df = pd.DataFrame.from_dict(psd_results, orient='index', columns=['psd'])
-relative_power_df = pd.DataFrame.from_dict(relative_power_results, orient='index', columns=['relative_power'])
-peak_frequency_df = pd.DataFrame.from_dict(peak_frequency_results, orient='index', columns=['peak_frequency'])
-
-# Concatenate DataFrames along the columns axis
-result_df = pd.concat([psd_df, relative_power_df, peak_frequency_df], axis=1)
+# Print the length of each dictionary
+print("Length of psd_results:", len(psd_results))
+print("Length of relative_power_results:", len(relative_power_results))
+print("Length of peak_frequency_results:", len(peak_frequency_results))
 
 
-# Plot PSD for a specific electrode
-electrode_idx = 0  # Example electrode index
-plt.figure(figsize=(10, 6))
-plt.plot(f, psd_results[electrode_idx])
-plt.xlabel('Frequency (Hz)')
-plt.ylabel('Power Spectral Density (dB/Hz)')
-plt.title('Power Spectral Density for Electrode {}'.format(electrode_idx))
-plt.grid(True)
-plt.show()
+# Iterate over dictionaries and print their lengths
+for name, dictionary in [("psd_results", psd_results),
+                          ("relative_power_results", relative_power_results),
+                          ("peak_frequency_results", peak_frequency_results)]:
+    print(f"Length of {name}: {len(dictionary)}")
+#
+# # Convert dictionaries to DataFrames
+# psd_df = pd.DataFrame.from_dict(psd_results, orient='index', columns=['psd'])
+relative_power_df = pd.DataFrame.from_dict(relative_power_results, orient='index',
+                                           columns=['alpha', ' beta', 'delta', 'gamma', 'theta'])
+# peak_frequency_df = pd.DataFrame.from_dict(peak_frequency_results, orient='index', columns=['peak_frequency'])
+#
+# # Concatenate DataFrames along the columns axis
+df_test_eegs = pd.concat([df_test_eegs, relative_power_df], axis=1)
+print("df_train_eegs.shape", df_test_eegs.shape)
+print("df_train_eegs.head()\n", df_test_eegs.head)
 
-# Print relative power and peak frequency for the same electrode
-print("Relative Power:")
-print(relative_power_results[electrode_idx])
-print("\nPeak Frequency: {:.2f} Hz".format(peak_frequency_results[electrode_idx]))
+
+# # Plot PSD for a specific electrode
+# electrode_idx = 0  # Example electrode index
+# plt.figure(figsize=(10, 6))
+# plt.plot(f, psd_results[electrode_idx])
+# plt.xlabel('Frequency (Hz)')
+# plt.ylabel('Power Spectral Density (dB/Hz)')
+# plt.title('Power Spectral Density for Electrode {}'.format(electrode_idx))
+# plt.grid(True)
+# plt.show()
+#
+# # Print relative power and peak frequency for the same electrode
+# print("Relative Power:")
+# print(relative_power_results[electrode_idx])
+# print("\nPeak Frequency: {:.2f} Hz".format(peak_frequency_results[electrode_idx]))
 
