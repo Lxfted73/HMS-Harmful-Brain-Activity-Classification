@@ -3,7 +3,7 @@ import numpy as np
 from scipy.signal import welch
 import matplotlib.pyplot as plt
 
-
+df_test_eegs = pd.read_parquet("Data/test_eegs.parquet")
 
 print("df_test_eegs.shape", df_test_eegs.shape)
 print("df_test_eegs.head()\n", df_test_eegs.head)
