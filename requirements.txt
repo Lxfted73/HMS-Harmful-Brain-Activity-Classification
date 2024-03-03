@@ -4,3 +4,4 @@ fastparquet
 scipy
 matplotlib
 tensorflow
+PyWavelets
