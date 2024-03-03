@@ -33,30 +33,25 @@ Modify each of these as you see fit.
 
 ### 3. Folder Structure
 
-Folders
-|--- Feature-Engineering
-|   |--- Time-Domain-Features.py
-|   |--- Frequency-Domain-Features.py
-|   |--- Time-Frequency-Domain-Features
-|--- Models (Sub folders can be made based on the type of implementations)
-|   |--- NN_Model
-|   |   |--- CNN-RNN-Model
-|   |   |   |--- CNN_RNN_Model.py
-|   |   |   |--- Model_Hyperparameterization.py
-|   |   |   |--- Example.py
-|   |   |--- Song_2.mp3
-|   |--- Support-Vector-Machines
-|   |   |--- Example
-|   |   |--- Example
-|   |--- Gradient-Boosting-Machines
-|   |   |--- Example
-|   |   |--- Example
-|   |--- Random-Forest-Decision-Tree
-|   |   |--- Example
-|   |   |--- Example
-|--- Model Ensemble
-|   |   |--- Song_2.mp3
-|--- Supporting Documentation
-|--- Data Visualization
-|--- Supporting Documentation
+- Feature-Engineering
+  - Time-Domain-Features.py
+  - Frequency-Domain-Features.py
+  - Time-Frequency-Domain-Features
+- Models (Sub folders can be made based on the type of implementations)
+  - NN_Model
+    - CNN-RNN-Model
+      	- CNN_RNN_Model.py
+      	- Model_Hyperparameterization.py
+      	- Example.py
+  - Support-Vector-Machines
+      	- Example
+      	- Example
+  - Gradient-Boosting-Machines
+    	- Example
+  		- Example
+  - Random-Forest-Decision-Tree
+    	- Example
+    	- Example
+- Model Ensemble
+  - Example
 
