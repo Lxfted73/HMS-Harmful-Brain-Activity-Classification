@@ -1,39 +1,36 @@
-Hello All! 
+# Project Overview
 
-Here's a read me summarizing our project. Thank you for reading! 
+**HMS-Harmful-Brain-Activity-Classification**: Classify EEGs into one of 6 classifications.
 
-Project Overview: 
-HMS-Harmful-Brain-Activity-Classification: Classify EGs into one of 6 classifications. 
+## Methodology
 
-Methodology:
-1. After feature engineering is complete, complete model development of several different models,
-    complete model ensemble, complete backtesting and various other model implementations, all while
-    including data visualization and documentation along the way (ChatGPT your code when you're finished)
+1. After feature engineering is complete, complete model development of several different models, complete model ensemble, complete backtesting and various other model implementations, all while including data visualization and documentation along the way.
 
-Group Workflow: 
-1. Commits
-    - In each commit, please provide a 1 sentence summary of what you did: i.e.
-        - Fixed bugs in Time-Domain-Features.py
-        - Added CNN_RNN_Models.py. Still needs data visualization and hyperparameterization
-        - Modified Frequency-Domain-Features.py to include
-        - Added documentation to Time-Domain-Features.py
-     
-2. Documentation
-     - Use ChatGPT for line by line comments
-     - Use ChatGPT for entire .py summary to place at the top of the python file
-     - Use ChatGPT for function summaries
+## Group Workflow
 
-  Examples: 
-    - (Copy-Paste Code) - ChatGPT please write me line by line comments for this code 
-    - (Copy-Paste Code) - ChatGPT please write an entire summary for my code at the top of the python
-      python file
-    - (Copy-Paste Code) - ChatGPT please include summaries for each of my functions including a:
-        description of what is happening, the arguments, and the outputs. 
+### 1. Commits
 
-  Modify each of these as you see fit. 
+- In each commit, please provide a 1 sentence summary of what you did, for example:
+    - Fixed bugs in `Time-Domain-Features.py`.
+    - Added `CNN_RNN_Models.py`. Still needs data visualization and hyperparameterization.
+    - Modified `Frequency-Domain-Features.py` to include.
+    - Added documentation to `Time-Domain-Features.py`.
 
+### 2. Documentation
 
-3. Folder Structure 
+- Use ChatGPT for line by line comments.
+- Use ChatGPT for entire .py summary to place at the top of the python file.
+- Use ChatGPT for function summaries.
+
+#### Examples:
+
+- (Copy-Paste Code) - ChatGPT please write me line by line comments for this code.
+- (Copy-Paste Code) - ChatGPT please write an entire summary for my code at the top of the python file.
+- (Copy-Paste Code) - ChatGPT please include summaries for each of my functions including a: description of what is happening, the arguments, and the outputs.
+
+Modify each of these as you see fit.
+
+### 3. Folder Structure
 
 Folders
 |--- Feature-Engineering
@@ -61,3 +58,4 @@ Folders
 |--- Supporting Documentation
 |--- Data Visualization
 |--- Supporting Documentation
+
