@@ -28,9 +28,9 @@
 
 ### 2. Documentation
 
-- Use ChatGPT for line by line comments.
 - Use ChatGPT for entire .py summary to place at the top of the python file.
 - Use ChatGPT for function summaries.
+- Use ChatGPT for inline comments when possible
 
 #### Examples:
 
