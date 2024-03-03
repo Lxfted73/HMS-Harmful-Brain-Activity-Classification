@@ -4,8 +4,22 @@ from scipy.signal import welch
 import matplotlib.pyplot as plt
 
 """
-To-do: Plot one type of case in EEG Data
+This script reads EEG data from a Parquet file, calculates the Power Spectral Density (PSD) using Welch's method,
+and analyzes the PSD to extract power values within specific frequency bands associated with brainwaves (delta, theta, alpha, beta, gamma).
+It then plots the PSD and the power values for each frequency band.
 
+Summary of Steps:
+1. Import necessary libraries: pandas, numpy, scipy.signal, and matplotlib.pyplot.
+2. Set a flag to control whether to plot graphs or not.
+3. Read EEG data from a Parquet file into a DataFrame.
+4. Calculate PSD for each electrode using Welch's method.
+5. If plotting is enabled, visualize the PSD for each electrode.
+6. Define frequency ranges for different brainwave bands.
+7. Extract frequencies and corresponding power values within each frequency band.
+8. Concatenate frequency and power values for each frequency band.
+9. If plotting is enabled, plot power values for each frequency band.
+
+Note: Inline comments are provided throughout the code to explain each step and provide context.
 """
 
 plot_graphs = True
@@ -240,8 +254,6 @@ if plot_graphs:
 
     # Create subplots for each frequency band
     plt.figure(figsize=(12, 8))
-
-
     # Delta band
     plt.subplot(321)
     plt.plot(delta_frequencies, delta_power, marker='o', linestyle='-')
