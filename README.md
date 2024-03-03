@@ -8,7 +8,17 @@
 
 ## Group Workflow
 
-### 1. Commits
+### 1. New Modules 
+- If you download a new module like tensorflow, update the the requirements.txt like this:
+	numpy
+	pandas
+	matplotlib
+	tensorflow
+- Run pip3 install -r requirements.txt
+	- This ensure that you have all of the required modules
+ 	- Run this prior to working
+
+### 2. Commits
 
 - In each commit, please provide a 1 sentence summary of what you did, for example:
     - Fixed bugs in `Time-Domain-Features.py`.
@@ -18,9 +28,9 @@
 
 ### 2. Documentation
 
-- Use ChatGPT for line by line comments.
 - Use ChatGPT for entire .py summary to place at the top of the python file.
 - Use ChatGPT for function summaries.
+- Use ChatGPT for inline comments when possible
 
 #### Examples:
 
@@ -31,7 +41,7 @@
 
 Modify each of these as you see fit.
 
-### 3. Folder Structure
+### 4. Folder Structure
 
 - Feature-Engineering
   - Time-Domain-Features.py
