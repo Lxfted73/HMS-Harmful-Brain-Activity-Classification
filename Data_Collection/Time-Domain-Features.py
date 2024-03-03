@@ -13,6 +13,34 @@ print("Missing Values:\n", missing_values)
 
 #no missing values
 
+#Print Data Shape
+print("df_test_eegs.shape:", df_test_eegs.shape)
+print("df_test_eegs.head():\n", df_test_eegs.head())
+
+# Plot one electrode of data:
+
+# Sampling frequency
+sampling_frequency = 200  # samples per second
+# Number of samples
+num_samples = 10000  # for example, plot 10000 samples
+# Time per sample
+time_per_sample = 1 / sampling_frequency  # seconds per sample
+# Create an array of sample indices
+sample_indices = np.arange(num_samples)
+# Convert sample indices to time in seconds
+time_seconds = sample_indices * time_per_sample
+
+plt.figure(figsize=(10,6))
+
+# Add title and labels
+plt.plot(time_seconds,df_test_eegs['Fp1'])
+plt.title("Frequency of Fp1")
+plt.xlabel('Seconds')
+plt.ylabel('Voltage (units)')
+
+# Show plot
+plt.show()
+
 #Calculate Mean Value
 mean_values = df_test_eegs.mean()
 print("Mean Values:\n", mean_values)
@@ -95,41 +123,6 @@ print("Standard Deviation:\n", std_values)
 print("\n\nVariance:\n", variance_values)
 print("\n\nRMS:\n", rms_values)
 
-#
-#
-#
-#
-#
-# pd.set_option('display.max_columns', None)
-#
-# # print("df_train_eegs.shape", df_test_eegs.shape)
-# # print("df_train_eegs.head()\n", df_test_eegs.head)
-#
-# electrodes = df_test_eegs.columns[:-1]  # Exclude the last column (EKG)
-# electrode_voltages = df_test_eegs[electrodes]
-# print("Electrodes: \n", electrodes,"Electrode Locations: \n", electrode_voltages)
-#
-# # Extract signal amplitude features
-# signal_amplitudes_mean = df_test_eegs[electrodes].mean(axis=0)
-# signal_amplitudes_max = df_test_eegs[electrodes].max(axis=0)
-# signal_amplitudes_min = df_test_eegs[electrodes].min(axis=0)
-# signal_amplitudes_variance = df_test_eegs[electrodes].var(axis=0)
-#
-# df_test_eegs['Mean_Amplitude'] = signal_amplitudes_mean.values
-# df_test_eegs['Max_Amplitude'] = signal_amplitudes_max.values
-# df_test_eegs['Min_Amplitude'] = signal_amplitudes_min.values
-# df_test_eegs['Variance_Amplitude'] = signal_amplitudes_variance.values
-#
-# # Print the updated DataFrame
-# print(df_test_eegs)
-#
-# # # Print the calculated features
-# # print("Mean Signal Amplitudes:")
-# # print(signal_amplitudes_mean)
-# # print("\nMaximum Signal Amplitudes:")
-# # print(signal_amplitudes_max)
-# # print("\nMinimum Signal Amplitudes:")
-# # print(signal_amplitudes_min)
-# # print("\nSignal Amplitudes Variance:")
-# # print(signal_amplitudes_variance)
+
+
 
