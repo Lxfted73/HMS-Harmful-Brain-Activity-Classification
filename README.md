@@ -26,7 +26,8 @@
 
 - (Copy-Paste Code) - ChatGPT please write me line by line comments for this code.
 - (Copy-Paste Code) - ChatGPT please write an entire summary for my code at the top of the python file.
-- (Copy-Paste Code) - ChatGPT please include summaries for each of my functions including a: description of what is happening, the arguments, and the outputs.
+- (Copy-Paste Code) - ChatGPT please include summaries for each of my functions including a: 
+      description of what is happening, the arguments, and the outputs.
 
 Modify each of these as you see fit.
 
