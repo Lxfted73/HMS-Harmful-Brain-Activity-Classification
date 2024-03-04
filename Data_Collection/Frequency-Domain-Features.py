@@ -309,3 +309,33 @@ if plot_graphs:
 
     # Show plot
     plt.show()
+
+'''SPECTAL PEAK FREQUENCY
+The spectral peak frequency for each frequency band, you can simply identify the frequency within 
+each band where the power is maximized.
+'''
+
+
+# Find spectral peak frequency for each frequency band
+def find_peak_frequency(frequencies, power_values):
+    # Find index of maximum power value
+    peak_index = np.argmax(power_values)
+    # Get corresponding frequency
+    spectral_peak_freq = frequencies[peak_index]
+    return spectral_peak_freq
+
+# Calculate spectral peak frequencies for each frequency band
+delta_peak_freq = find_peak_frequency(delta_frequencies, delta_power)
+theta_peak_freq = find_peak_frequency(theta_frequencies, theta_power)
+alpha_peak_freq = find_peak_frequency(alpha_frequencies, alpha_power)
+beta_peak_freq = find_peak_frequency(beta_frequencies, beta_power)
+gamma_peak_freq = find_peak_frequency(gamma_frequencies, gamma_power)
+
+# Print spectral peak frequencies for each band
+print("\nSpectral peak frequencies:")
+print("Delta Peak Frequency:", delta_peak_freq, "Hz")
+print("Theta Peak Frequency:", theta_peak_freq, "Hz")
+print("Alpha Peak Frequency:", alpha_peak_freq, "Hz")
+print("Beta Peak Frequency:", beta_peak_freq, "Hz")
+print("Gamma Peak Frequency:", gamma_peak_freq, "Hz")
+
