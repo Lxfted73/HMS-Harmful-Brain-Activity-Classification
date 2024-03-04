@@ -310,7 +310,7 @@ if plot_graphs:
     # Show plot
     plt.show()
 
-'''SPECTAL PEAK FREQUENCY
+'''SPECTRAL PEAK FREQUENCY
 The spectral peak frequency for each frequency band, you can simply identify the frequency within 
 each band where the power is maximized.
 '''
@@ -339,3 +339,119 @@ print("Alpha Peak Frequency:", alpha_peak_freq, "Hz")
 print("Beta Peak Frequency:", beta_peak_freq, "Hz")
 print("Gamma Peak Frequency:", gamma_peak_freq, "Hz")
 
+
+'''Importing necessary libraries'''
+
+from scipy.stats import entropy
+from scipy.signal import find_peaks
+from scipy.stats import skew, kurtosis
+from scipy.signal import argrelextrema
+from scipy.stats import gmean
+
+
+def calculate_entropy(power_values):
+    # Normalize power values
+    normalized_power = power_values / np.sum(power_values)
+    # Calculate entropy
+    entropy_value = entropy(normalized_power, base=2)
+    return entropy_value
+
+def calculate_spectral_centroid(frequencies, power_values):
+    # Calculate spectral centroid
+    spectral_centroid = np.sum(frequencies * power_values) / np.sum(power_values)
+    return spectral_centroid
+
+def calculate_spectral_flatness(power_values):
+    # Calculate geometric mean
+    geometric_mean = gmean(power_values)
+    # Calculate arithmetic mean
+    arithmetic_mean = np.mean(power_values)
+    # Calculate spectral flatness
+    spectral_flatness = geometric_mean / arithmetic_mean
+    return spectral_flatness
+
+def calculate_spectral_edge_frequency(frequencies, power_values, percentile):
+    # Calculate cumulative sum of power spectrum
+    cumulative_power = np.cumsum(power_values)
+    # Normalize cumulative sum
+    normalized_cumulative_power = cumulative_power / np.sum(power_values)
+    # Find index where cumulative power exceeds the specified percentile
+    edge_index = np.argmax(normalized_cumulative_power >= percentile)
+    # Get corresponding frequency
+    spectral_edge_freq = frequencies[edge_index]
+    return spectral_edge_freq
+
+#DELTA
+# Compute spectral centroid, spectral flatness, and spectral edge frequency for the delta band
+delta_entropy=calculate_entropy(power_values)
+delta_centroid = calculate_spectral_centroid(delta_frequencies, delta_power)
+delta_flatness = calculate_spectral_flatness(delta_power)
+delta_edge_freq_95 = calculate_spectral_edge_frequency(delta_frequencies, delta_power, 0.95)
+
+# Print results
+print("\n")
+print("Delta Entropy:",delta_entropy)
+print("Delta Band Spectral Centroid:", delta_centroid, "Hz")
+print("Delta Band Spectral Flatness:", delta_flatness)
+print("Delta Band 95% Spectral Edge Frequency:", delta_edge_freq_95, "Hz")
+
+
+#THETA
+# Compute spectral centroid, spectral flatness, and spectral edge frequency for the Theta band
+theta_entropy=calculate_entropy(power_values)
+theta_centroid = calculate_spectral_centroid(theta_frequencies, theta_power)
+theta_flatness = calculate_spectral_flatness(theta_power)
+theta_edge_freq_95 = calculate_spectral_edge_frequency(theta_frequencies, theta_power, 0.95)
+
+# Print results
+print("\n")
+print("Theta Entropy:",theta_entropy)
+print("Theta Band Spectral Centroid:", theta_centroid, "Hz")
+print("Theta Band Spectral Flatness:", theta_flatness)
+print("Theta Band 95% Spectral Edge Frequency:", theta_edge_freq_95, "Hz")
+
+
+
+#Alpha
+# Compute spectral centroid, spectral flatness, and spectral edge frequency for the Alpha band
+alpha_entropy=calculate_entropy(power_values)
+alpha_centroid = calculate_spectral_centroid(alpha_frequencies, alpha_power)
+alpha_flatness = calculate_spectral_flatness(alpha_power)
+alpha_edge_freq_95 = calculate_spectral_edge_frequency(alpha_frequencies, alpha_power, 0.95)
+
+# Print results
+print("\n")
+print("Alpha Entropy:", alpha_entropy)
+print("Alpha Band Spectral Centroid:", alpha_centroid, "Hz")
+print("Alpha Band Spectral Flatness:", alpha_flatness)
+print("Alpha Band 95% Spectral Edge Frequency:", alpha_edge_freq_95, "Hz")
+
+
+#Beta
+# Compute spectral centroid, spectral flatness, and spectral edge frequency for the Beta band
+beta_entropy=calculate_entropy(power_values)
+beta_centroid = calculate_spectral_centroid(beta_frequencies, beta_power)
+beta_flatness = calculate_spectral_flatness(beta_power)
+beta_edge_freq_95 = calculate_spectral_edge_frequency(beta_frequencies, beta_power, 0.95)
+
+# Print results
+print("\n")
+print("Beta Entropy:", beta_entropy)
+print("Beta Band Spectral Centroid:", beta_centroid, "Hz")
+print("Beta Band Spectral Flatness:", beta_flatness)
+print("Beta Band 95% Spectral Edge Frequency:", beta_edge_freq_95, "Hz")
+
+
+#GAMMA
+# Compute spectral centroid, spectral flatness, and spectral edge frequency for the Beta band
+gamma_entropy=calculate_entropy(power_values)
+gamma_centroid = calculate_spectral_centroid(gamma_frequencies, gamma_power)
+gamma_flatness = calculate_spectral_flatness(gamma_power)
+gamma_edge_freq_95 = calculate_spectral_edge_frequency(gamma_frequencies, gamma_power, 0.95)
+
+# Print results
+print("\n")
+print("Gamma Entropy:", gamma_entropy)
+print("Gamma Band Spectral Centroid:", gamma_centroid, "Hz")
+print("Gamma Band Spectral Flatness:", gamma_flatness)
+print("Gamma Band 95% Spectral Edge Frequency:", gamma_edge_freq_95, "Hz")
