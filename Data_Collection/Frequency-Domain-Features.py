@@ -26,11 +26,11 @@ plot_graphs = True
 
 
 # Read Parquet file into a DataFrame
-df_test_eegs = pd.read_parquet("Data/test_eegs.parquet")
+df_eegs = pd.read_parquet("Data/eegs.parquet")
 
 
 # Calculate the Power Spectral Density (PSD)
-num_channels = df_test_eegs.shape[1]  # Number of EEG channels
+num_channels = df_eegs.shape[1]  # Number of EEG channels
 
 # Calculate PSD for each electrode node
 psd_results = []
@@ -38,7 +38,7 @@ fs = 200 # See HMS Data Page under train_eegs/
 # -1 to exclude EKGs
 for i in range(num_channels-1):
     # Extract EEG signal data from the ith electrode node
-    eeg_signal = df_test_eegs.iloc[:, i].values
+    eeg_signal = df_eegs.iloc[:, i].values
 
     # Calculate PSD using Welch's Method
     frequencies, psd = welch(eeg_signal, fs=fs, nperseg=fs*2)
