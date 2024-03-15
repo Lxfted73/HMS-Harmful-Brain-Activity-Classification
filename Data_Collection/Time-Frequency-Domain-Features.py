@@ -23,29 +23,41 @@ Data Analysis:
 Plotting:
 - If print_graph_stft is enabled, it plots the STFT magnitude.
 - If print_graph_wavelet is enabled, it plots the wavelet coefficients.
+
+Returns:
+ - stft_data_results - A List containing the STFT transform for each of the Nodes
+ 
 """
 
-class tfdf:
+class TimeFrequencyDomainFeatures:
     def __init__(self, data_file):
         self.df_eegs = pd.read_parquet(data_file)
         self.stft_data_results = None
+        self.wavelet_coeffs_results = None
 
+    def explain_stft_data_results(self):
+        print("\nSTFT_data - List Length", len(self.stft_data_results))
+        print("\nSTFT_data[0] - Length", len(self.stft_data_results[0]))
+
+    def explain_wavelet_coeffs_results(self):
+        print("\nWavelet_data - List Length", len(self.wavelet_coeffs_results))
+        print("\nWavelet_data[0] - Length", len(self.wavelet_coeffs_results[0]))
     def check_missing_values(self):
         missing_values = self.df_eegs.isnull().sum()
         print("Missing Values:\n", missing_values)
 
 
     def print_data_info(self):
-            print("df_eegs.shape:", self.df_eegs.shape)
+            print("df_eeegs.shape:", self.df_eegs.shape)
             print("df_eegs.head():\n", self.df_eegs.head())
 
 
-    def compute_stft(self, print_graph=False):
+    def compute_stft(self, print_graph_example=False):
         fs = 200
-        stft_data_results = []
+        self.stft_data_results = []
         for i in range(len(self.df_eegs.columns)-1):
             frequencies, time_segments, stft_data = stft(self.df_eegs.iloc[:, i], fs=fs, nperseg=fs * 2)
-            stft_data_results.append(stft_data)
+            self.stft_data_results.append(stft_data)
         if print_graph:
             # Sampling Frequency
             fs = 200
@@ -62,19 +74,19 @@ class tfdf:
             plt.ylim(0.1, 2)
             plt.colorbar(label='Magnitude')
             plt.show()
-        return stft_data_results
+        return self.stft_data_results
 
 
 
 
-    def compute_wavelet_decomposition(self, print_graph=False):
+    def compute_wavelet_decomposition(self, print_graph_example=False):
             wavelet_name = 'sym5'
             level = 5
-            wavelet_coeffs_results = []
+            self.wavelet_coeffs_results = []
             for i in range(len(self.df_eegs.columns)-1):
-                signal = self.df_eegs.iloc[:, 1]
+                signal = self.df_eegs.iloc[:, i]
                 coeffs = pywt.wavedec(signal, wavelet_name, level=level)
-                wavelet_coeffs_results.append(coeffs)
+                self.wavelet_coeffs_results.append(coeffs)
             if print_graph:
                 # Define wavelet parameters
                 wavelet_name = 'sym5'  # Symlet 5 wavelet
@@ -94,10 +106,13 @@ class tfdf:
                     plt.title(f'Detail {i + 1}' if i > 0 else 'Approximation')
                 plt.tight_layout()
                 plt.show()
+            return self.wavelet_coeffs_results
 
-eeg_analysis = tfdf("Data/eegs.parquet")
+
+eeg_analysis = TimeFrequencyDomainFeatures("/Users/thebowofapollo/PycharmProjects/HMS - Harmful Brain Activity Classification/train_eegs/568657.parquet")
 eeg_analysis.check_missing_values()
 eeg_analysis.print_data_info()
-eeg_analysis.compute_stft(print_graph=True)
-eeg_analysis.compute_wavelet_decomposition(print_graph=False)
-
+eeg_analysis.compute_stft(print_graph_example=True)
+eeg_analysis.compute_wavelet_decomposition(print_graph_example=False)
+eeg_analysis.explain_stft_data_results()
+eeg_analysis.explain_wavelet_coeffs_results()

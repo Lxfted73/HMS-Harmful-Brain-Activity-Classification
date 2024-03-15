@@ -83,6 +83,7 @@ class Time_Domain_Features:
         std_values = self.df_spectrogram.std()
         variance_values = self.df_spectrogram.var()
         rms_values = np.sqrt(np.mean(self.df_spectrogram**2))
+
         if print_console:
             print("Standard Deviation:\n", std_values)
             print("\n\nVariance:\n", variance_values)
@@ -91,5 +92,4 @@ class Time_Domain_Features:
 
 tdf = Time_Domain_Features("Data/test_eegs.parquet", "Data/test_spectogram.parquet")
 tdf.analyze_eeg_data(print_graph=True)
-tdf.analyze_spectrogram_data(print_graph=True
-                             )
+tdf.analyze_spectrogram_data(print_graph=True)
