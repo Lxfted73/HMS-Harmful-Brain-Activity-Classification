@@ -3,35 +3,31 @@ import numpy as np
 from scipy.signal import welch
 import matplotlib.pyplot as plt
 
+
 """
 This script reads EEG data from a Parquet file, calculates the Power Spectral Density (PSD) using Welch's method,
 and analyzes the PSD to extract power values within specific frequency bands associated with brainwaves (delta, theta, alpha, beta, gamma).
-It then plots the PSD and the power values for each frequency band.
+It then computes various spectral features such as spectral centroid, spectral flatness, spectral edge frequency, and entropy for each band.
+Finally, it visualizes the PSD and power values for each frequency band, along with computed spectral features.
 
 Summary of Steps:
 1. Import necessary libraries: pandas, numpy, scipy.signal, and matplotlib.pyplot.
 2. Set a flag to control whether to plot graphs or not.
 3. Read EEG data from a Parquet file into a DataFrame.
-4. Calculate PSD for each electrode using Welch's method.
+4. Calculate PSD for each electrode using Welch's Method.
 5. If plotting is enabled, visualize the PSD for each electrode.
 6. Define frequency ranges for different brainwave bands.
 7. Extract frequencies and corresponding power values within each frequency band.
 8. Concatenate frequency and power values for each frequency band.
-9. If plotting is enabled, plot power values for each frequency band.
-
-Note: Inline comments are provided throughout the code to explain each step and provide context.
+9. Compute spectral features (entropy, spectral centroid, spectral flatness, spectral edge frequency) for each band.
+10. Visualize power values and PSD for each frequency band.
 """
 
 plot_graphs = True
-
-
 # Read Parquet file into a DataFrame
-df_eegs = pd.read_parquet("Data/eegs.parquet")
-
-
+df_eegs = pd.read_parquet("train_eegs/568657.parquet")
 # Calculate the Power Spectral Density (PSD)
 num_channels = df_eegs.shape[1]  # Number of EEG channels
-
 # Calculate PSD for each electrode node
 psd_results = []
 fs = 200 # See HMS Data Page under train_eegs/
@@ -123,28 +119,31 @@ for i in range(num_channels-1):
 print("len(delta_frequency_results)", len(delta_frequencies_results))
 print("len(theta_frequency_results)", len(theta_frequencies_results))
 print("len(alpha_frequency_results)", len(alpha_frequencies_results))
-print("len(gamma_frequency_results)", len(gamma_frequencies_results))
 print("len(beta_frequency_results)", len(beta_frequencies_results))
+print("len(gamma_frequency_results)", len(gamma_frequencies_results))
 
 
 print("len(delta_power_results)", len(delta_power_results))
 print("len(theta_power_results)", len(theta_power_results))
 print("len(alpha_power_results)", len(alpha_power_results))
-print("len(gamma_power_results)", len(gamma_power_results))
 print("len(beta_power_results)", len(beta_power_results))
+print("len(gamma_power_results)", len(gamma_power_results))
+
 
 # Print first item of each list
 print("\nFirst item of delta_frequency_results:", delta_frequencies_results[0])
 print("\nFirst item of theta_frequency_results:", theta_frequencies_results[0])
 print("\nFirst item of alpha_frequency_results:", alpha_frequencies_results[0])
-print("\nFirst item of gamma_frequency_results:", gamma_frequencies_results[0])
 print("\nFirst item of beta_frequency_results:", beta_frequencies_results[0])
+print("\nFirst item of gamma_frequency_results:", gamma_frequencies_results[0])
+
 
 print("\nFirst item of delta_power_results:", delta_power_results[0])
 print("\nFirst item of theta_power_results:", theta_power_results[0])
 print("\nFirst item of alpha_power_results:", alpha_power_results[0])
-print("\nFirst item of gamma_power_results:", gamma_power_results[0])
 print("\nFirst item of beta_power_results:", beta_power_results[0])
+print("\nFirst item of gamma_power_results:", gamma_power_results[0])
+
 
 
 def concatenate_lists_by_index(list1, list2, axis=0):
@@ -257,7 +256,7 @@ if plot_graphs:
     # Delta band
     plt.subplot(321)
     plt.plot(delta_frequencies, delta_power, marker='o', linestyle='-')
-    plt.title('Theta Band')
+    plt.title('Delta Band')
     plt.xlabel('Frequency (Hz)')
     plt.ylabel('Power/Frequency (dB/Hz)')
     plt.grid(True)

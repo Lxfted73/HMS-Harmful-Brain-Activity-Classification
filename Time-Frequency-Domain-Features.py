@@ -109,7 +109,7 @@ class TimeFrequencyDomainFeatures:
             return self.wavelet_coeffs_results
 
 
-eeg_analysis = TimeFrequencyDomainFeatures("/Users/thebowofapollo/PycharmProjects/HMS - Harmful Brain Activity Classification/train_eegs/568657.parquet")
+eeg_analysis = TimeFrequencyDomainFeatures("/train_eegs/568657.parquet")
 eeg_analysis.check_missing_values()
 eeg_analysis.print_data_info()
 eeg_analysis.compute_stft(print_graph_example=True)

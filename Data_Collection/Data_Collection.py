@@ -3,19 +3,19 @@ import numpy as np
 from scipy.signal import welch
 import matplotlib.pyplot as plt
 
-df_test_eegs = pd.read_parquet("Data/test_eegs.parquet")
+df_eegs = pd.read_parquet("Data/eegs.parquet")
 
-print("df_test_eegs.shape", df_test_eegs.shape)
-print("df_test_eegs.head()\n", df_test_eegs.head)
+print("df_eegs.shape", df_eegs.shape)
+print("df_eegs.head()\n", df_eegs.head)
 
-electrodes = df_test_eegs.columns[:-1]  # Exclude the last column (EKG)
-electrode_locations = df_test_eegs[electrodes]
+electrodes = df_eegs.columns[:-1]  # Exclude the last column (EKG)
+electrode_locations = df_eegs[electrodes]
 
 # Extract signal amplitude features
-signal_amplitudes_mean = df_test_eegs[electrodes].mean(axis=0)
-signal_amplitudes_max = df_test_eegs[electrodes].max(axis=0)
-signal_amplitudes_min = df_test_eegs[electrodes].min(axis=0)
-signal_amplitudes_variance = df_test_eegs[electrodes].var(axis=0)
+signal_amplitudes_mean = df_eegs[electrodes].mean(axis=0)
+signal_amplitudes_max = df_eegs[electrodes].max(axis=0)
+signal_amplitudes_min = df_eegs[electrodes].min(axis=0)
+signal_amplitudes_variance = df_eegs[electrodes].var(axis=0)
 
 # # Print the calculated features
 # print("Mean Signal Amplitudes:")
@@ -31,7 +31,7 @@ signal_amplitudes_variance = df_test_eegs[electrodes].var(axis=0)
 # from scipy.signal import welch
 # import matplotlib.pyplot as plt
 
-# Assume df_test_eegs contains preprocessed EEG data with shape (n_samples, n_channels)
+# Assume df_eegs contains preprocessed EEG data with shape (n_samples, n_channels)
 
 # Define frequency bands
 freq_bands = {'delta': (0.5, 4),
@@ -62,9 +62,9 @@ relative_power_results = {}
 peak_frequency_results = {}
 
 # Perform spectral analysis for each electrode
-for channel in range(df_test_eegs.shape[1]):
+for channel in range(df_eegs.shape[1]):
     # Compute PSD using Welch's method
-    f, psd = welch(df_test_eegs.iloc[:, channel], fs=fs, nperseg=window_length)
+    f, psd = welch(df_eegs.iloc[:, channel], fs=fs, nperseg=window_length)
 
     # Calculate relative power in each frequency band
     total_power = np.sum(psd)
@@ -98,9 +98,9 @@ relative_power_df = pd.DataFrame.from_dict(relative_power_results, orient='index
 # peak_frequency_df = pd.DataFrame.from_dict(peak_frequency_results, orient='index', columns=['peak_frequency'])
 #
 # # Concatenate DataFrames along the columns axis
-df_test_eegs = pd.concat([df_test_eegs, relative_power_df], axis=1)
-print("df_train_eegs.shape", df_test_eegs.shape)
-print("df_train_eegs.head()\n", df_test_eegs.head)
+df_eegs = pd.concat([df_eegs, relative_power_df], axis=1)
+print("df_train_eegs.shape", df_eegs.shape)
+print("df_train_eegs.head()\n", df_eegs.head)
 
 
 # # Plot PSD for a specific electrode
