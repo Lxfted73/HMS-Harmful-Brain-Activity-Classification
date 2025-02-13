@@ -26,21 +26,6 @@
     - Modified `Frequency-Domain-Features.py` to include.
     - Added documentation to `Time-Domain-Features.py`.
 
-### 2. Documentation
-
-- Use ChatGPT for entire .py summary to place at the top of the python file.
-- Use ChatGPT for function summaries.
-- Use ChatGPT for inline comments when possible
-
-#### Examples:
-
-- (Copy-Paste Code) - ChatGPT please write me line by line comments for this code.
-- (Copy-Paste Code) - ChatGPT please write an entire summary for my code at the top of the python file.
-- (Copy-Paste Code) - ChatGPT please include summaries for each of my functions including a: 
-      description of what is happening, the arguments, and the outputs.
-
-Modify each of these as you see fit.
-
 ### 4. Folder Structure
 
 - Feature-Engineering
